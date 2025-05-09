@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | Scrum E-Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .flip-card {
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 150px;
+      height: 50px;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+    .flip-card-inner:hover {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 150px;
+      height: 50px;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 600;
+      color: black;
+      background-color: #4a90e2;
+      border-radius: 0.375rem;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body class="bg-[#4a90e2] text-sm md:text-base font-sans flex items-center justify-center min-h-screen">
+
+  <section class="p-4 flex flex-col items-center w-full max-w-xs md:max-w-md">
+    <div class="flip-card mb-6">
+      <div class="flip-card-inner" id="flipCardInner">
+        <div class="flip-card-front space-x-2">
+          <img src="pic.png" class="w-8 h-8" />
+          <span class="font-semibold text-white">SCRUM E-LEARNING</span>
+        </div>
+        <div class="flip-card-back">
+          <span class="font-semibold text-white">SCRUM E-LEARNING</span>
+        </div>
+      </div>
+    </div>
+
+    <form autocomplete="off" class="bg-white p-6 rounded shadow w-full flex flex-col space-y-4">
+      <h3 class="text-center font-bold text-lg">Log in</h3>
+
+      <input class="border border-gray-300 px-3 py-2 rounded text-sm md:text-base" placeholder="Email" type="email" required />
+
+      <div class="relative">
+        <input id="password" class="border border-gray-300 w-full px-3 py-2 rounded pr-12 text-sm md:text-base" placeholder="Password" type="password" required />
+        <button type="button" onclick="togglePassword()" class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-blue-500 hover:underline">
+          Show
+        </button>
+      </div>
+
+      <a class="text-xs text-right text-blue-600 hover:underline" href="recover.html">Forgot Password?</a>
+
+      <button class="bg-[#5bc0de] text-white py-2 rounded hover:bg-[#39a8cb] text-sm md:text-base font-semibold" type="submit">
+        Log in
+      </button>
+
+      <p class="text-xs text-center">
+        Don't have an account?
+        <a class="text-blue-600 hover:underline" href="signup.html">Click SIGN UP</a>
+      </p>
+    </form>
+  </section>
+
+  <script>
+    function togglePassword() {
+      const pwInput = document.getElementById('password');
+      const toggleBtn = event.target;
+      if (pwInput.type === 'password') {
+        pwInput.type = 'text';
+        toggleBtn.textContent = 'Hide';
+      } else {
+        pwInput.type = 'password';
+        toggleBtn.textContent = 'Show';
+      }
+    }
+  </script>
+
+</body>
+</html>

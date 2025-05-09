@@ -1,0 +1,146 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Scrum E-Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
+  <script>
+    function goHome() {
+      alert('Going to Home page...');
+    }
+    function refreshTopic(topic) {
+      alert('Refreshing ' + topic + ' topic...');
+    }
+  </script>
+</head>
+<body class="bg-[#a0b0e0] min-h-screen flex justify-start items-start p-4 md:p-10">
+
+  <!-- Sidebar -->
+  <div class="bg-[#d3d3d3] w-20 md:w-24 h-full fixed top-0 left-0 flex flex-col justify-start items-center pt-8 space-y-8">
+    <img src="https://storage.googleapis.com/a1aa/image/6c6c2135-0ca6-450b-1b28-fb423ef2ed1b.jpg" alt="Logo" class="w-12 h-12 md:w-14 md:h-14" />
+    <button aria-label="Home" onclick="goHome()" class="text-black text-2xl hover:text-blue-600 transition" title="Home">
+      <i class="fas fa-home"></i>
+    </button>
+  </div>
+
+  <!-- Main content -->
+  <main class="ml-24 md:ml-28 flex flex-col gap-10 pt-10 max-w-10xl w-full px-4 md:px-8">
+    <h1 class="text-black text-2xl font-bold">SCRUM E-LEARNING</h1>
+
+    <section class="flex items-center gap-8">
+      <div class="bg-white rounded-full w-28 h-28 flex justify-center items-center">
+        <img src="https://storage.googleapis.com/a1aa/image/06cc7e2d-2d85-4167-7198-48dd0afe73c3.jpg" alt="User icon" class="w-20 h-20" />
+      </div>
+      <div class="flex flex-col text-black text-lg space-y-1">
+        <span class="font-semibold">USER11111</span>
+        <span class="flex items-center gap-2">
+          Philippines
+          <img src="https://storage.googleapis.com/a1aa/image/1e583bb4-bbfb-4b4c-f853-bea99fbe966f.jpg" alt="Flag" class="w-8 h-5" />
+        </span>
+        <span class="flex items-center gap-2">
+          Active
+          <span class="w-5 h-5 rounded-full bg-green-500 inline-block"></span>
+        </span>
+      </div>
+    </section>
+
+    <h2 class="text-black text-xl font-semibold flex items-center justify-between">
+      <span>Recent topic view</span>
+      <button aria-label="Refresh all topics" onclick="alert('Refreshing all topics...')" class="text-black hover:text-blue-600 text-2xl transition" title="Refresh All">
+        <i class="fas fa-sync-alt"></i>
+      </button>
+    </h2>
+
+    <!-- Topics -->
+    <section class="flex flex-wrap gap-6">
+      <!-- Topic card -->
+      <article class="w-40 md:w-48 bg-[#d3d3d3] rounded overflow-hidden">
+        <div class="relative">
+          <img src="https://storage.googleapis.com/a1aa/image/bb946771-fc39-4cb3-9a94-7447c59f8c2b.jpg" alt="Science" class="w-full h-auto" />
+          <button onclick="refreshTopic('Science')" class="absolute top-2 right-2 text-black text-xl hover:text-blue-600 transition">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+        </div>
+        <div class="text-center text-black text-lg py-3 font-semibold">Science</div>
+      </article>
+
+      <article class="w-40 md:w-48 bg-[#d3d3d3] rounded overflow-hidden">
+        <div class="relative">
+          <img src="https://storage.googleapis.com/a1aa/image/d2e7bde6-9862-4895-c119-55790f92835d.jpg" alt="History" class="w-full h-auto" />
+          <button onclick="refreshTopic('History')" class="absolute top-2 right-2 text-black text-xl hover:text-blue-600 transition">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+        </div>
+        <div class="text-center text-black text-lg py-3 font-semibold">History</div>
+      </article>
+
+      <article class="w-40 md:w-48 bg-[#d3d3d3] rounded overflow-hidden">
+        <div class="relative">
+          <img src="https://storage.googleapis.com/a1aa/image/0d46547c-9856-41bf-273d-6427149c8318.jpg" alt="Math" class="w-full h-auto" />
+          <button onclick="refreshTopic('Math')" class="absolute top-2 right-2 text-black text-xl hover:text-blue-600 transition">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+        </div>
+        <div class="text-center text-black text-lg py-3 font-semibold">Math</div>
+      </article>
+    </section>
+
+    <!-- Info Section -->
+    <section class="mt-10 bg-[#d3d3d3] p-6 md:p-8 rounded text-black text-lg space-y-8">
+      <div>
+        <h3 class="font-bold text-xl mb-4">Quick Links</h3>
+        <nav class="flex flex-wrap gap-4">
+          <a href="#" class="bg-white text-black px-5 py-3 rounded shadow hover:bg-gray-200 transition">Dashboard</a>
+          <a href="#" class="bg-white text-black px-5 py-3 rounded shadow hover:bg-gray-200 transition">Profile</a>
+          <a href="#" class="bg-white text-black px-5 py-3 rounded shadow hover:bg-gray-200 transition">Settings</a>
+          <a href="#" class="bg-white text-black px-5 py-3 rounded shadow hover:bg-gray-200 transition">Help</a>
+        </nav>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-xl mb-4">Notifications</h3>
+        <ul class="list-disc list-inside space-y-2 max-h-32 overflow-y-auto">
+          <li>New course "Advanced Math" available now!</li>
+          <li>Webinar on History this Friday at 3 PM.</li>
+          <li>Don't forget to complete your Science quiz.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-xl mb-4">Search Topics</h3>
+        <input type="search" placeholder="Search topics..." class="w-full p-3 rounded border border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+
+      <div>
+        <h3 class="font-bold text-xl mb-4">Favorite Topics</h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="bg-blue-300 text-black px-4 py-2 rounded-full cursor-pointer select-none">Science</span>
+          <span class="bg-blue-300 text-black px-4 py-2 rounded-full cursor-pointer select-none">Math</span>
+          <span class="bg-blue-300 text-black px-4 py-2 rounded-full cursor-pointer select-none">Creative Writing</span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-xl mb-4">Daily Tip</h3>
+        <p class="italic">"Consistent study habits lead to lasting knowledge. Keep going!"</p>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-xl mb-4">User Stats Summary</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li>Courses Completed: 5</li>
+          <li>Hours Studied: 12</li>
+          <li>Badges Earned: 3</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

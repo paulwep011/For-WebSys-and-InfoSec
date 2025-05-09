@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=480, user-scalable=no">
+  <title>Signup | Scrum E-Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class="bg-[#4a90e2] flex items-center justify-center min-h-screen text-base">
+
+  <section class="p-6 bg-white rounded-lg shadow-lg w-full max-w-md">
+    <div class="flex items-center space-x-2 align-items-center mb-6">
+        <img src="pic.png" class="w-8 h-8" />
+        <span class="font-semibold text-black">SCRUM E-LEARNING</span>
+    </div>
+    <br>      
+    <!-- Signup Form -->
+    <form autocomplete="off" class="flex flex-col gap-4">
+      <h2 class="text-xl font-bold text-center">Sign up</h2>
+      <input type="text" placeholder="Name" class="border border-gray-300 p-2 rounded w-full" required />
+      <input type="email" placeholder="Email" class="border border-gray-300 p-2 rounded w-full" required />
+      <div class="relative">
+        <input id="password" type="password" placeholder="Password" class="border border-gray-300 p-2 rounded w-full pr-16" required />
+        <button type="button" onclick="togglePassword()" class="absolute right-2 top-1/2 -translate-y-1/2 text-blue-600 text-sm">
+          Show
+        </button>
+      </div>
+      <button type="submit" class="bg-[#5bc0de] hover:bg-[#39a8cb] text-white font-semibold py-2 rounded">
+        Sign up
+      </button>
+      <p class="text-sm text-center">
+        Already have an account?
+        <a href="login.html" class="text-blue-600 underline">Click LOGIN</a>
+      </p>
+    </form>
+  </section>
+
+  <script>
+    function togglePassword() {
+      const input = document.getElementById("password");
+      const btn = event.target;
+      if (input.type === "password") {
+        input.type = "text";
+        btn.textContent = "Hide";
+      } else {
+        input.type = "password";
+        btn.textContent = "Show";
+      }
+    }
+  </script>
+
+</body>
+</html>

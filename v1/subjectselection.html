@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Learn Something Cool Today</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #4b5563;
+        border-radius: 3px;
+      }
+
+      .flip-card {
+        width: 100%;
+        height: 200px;
+        perspective: 1000px;
+        margin-bottom: 10px;
+      }
+
+      .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+      }
+
+      .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+
+      .flip-card-front,
+      .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border-radius: 8px;
+      }
+
+      .flip-card-front {
+        background-color: #a5cce6;
+      }
+
+      .flip-card-back {
+        background-color: #2d3748;
+        color: rgb(136, 203, 230);
+        transform: rotateY(180deg);
+      }
+    </style>
+  </head>
+  <body class="bg-[#4a7ac7] min-h-screen flex text-gray-800">
+    <aside id="sidebar" class="bg-gray-300 w-48 min-h-screen p-3 overflow-y-auto">
+      <div class="flex flex-col items-center mb-3">
+        <i id="homeButton" class="fas fa-home text-xl cursor-pointer"></i>
+        <span class="text-xs mt-1">Select Subject</span>
+      </div>
+
+      <nav class="text-xs font-semibold space-y-2">
+        <!-- Subjects and Topics -->
+        <script>
+          const subjects = {
+            Science: ["Atmosphere", "Geosphere", "Hydrosphere", "Biosphere", "Photosynthesis", "Gravity", "Electricity", "Light", "Sound", "Cells"],
+            Math: ["Algebra", "Geometry", "Trigonometry", "Calculus", "Statistics", "Probability", "Fractions", "Decimals", "Percentages", "Word Problems"],
+            History: ["Ancient Civilizations", "Medieval Period", "Renaissance", "Colonial Era", "World War I", "World War II", "Cold War", "Philippine Revolution", "EDSA Revolution", "Modern Era"],
+            MAPEH: ["Music", "Arts", "Physical Education", "Health", "Dance", "Painting", "Wellness", "Fitness", "Instruments", "Singing"],
+            "Araling Panlipunan": ["Kasaysayan ng Pilipinas", "Kabihasnang Asyano", "Rebolusyong Pilipino", "Panahon ng Kastila", "Panahon ng Amerikano", "Panahon ng Hapones", "Demokrasya", "Edukasyon", "Kultura", "Ekonomiya"],
+            TLE: ["Cooking", "Baking", "Tailoring", "Carpentry", "Electrical Works", "Agriculture", "Aquaculture", "Computer Hardware", "Housekeeping", "Entrepreneurship"]
+          };
+        </script>
+
+        <div id="dynamicSubjects"></div>
+      </nav>
+    </aside>
+
+    <main class="flex-1 p-6 overflow-y-auto text-white">
+      <button id="profileBtn" class="absolute top-4 right-4 p-1 bg-white rounded-full shadow-md size-10 hover:bg-gray-200 focus:outline-none">
+        <i class="fas fa-user text-sm text-gray-700"></i>
+      </button>
+
+      <div id="profileMenu" class="hidden absolute top-12 right-4 bg-white shadow-lg rounded-md p-2">
+        <a href="userprof.html" class="block text-black p-2 hover:bg-gray-100">My Profile</a>
+        <a href="login.html" class="block text-black p-2 hover:bg-gray-100">Log Out</a>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div id="defaultCard" class="bg-white text-black p-6 rounded shadow text-center text-xl font-bold">
+        Learn Something Cool Today
+      </div>
+
+      <div id="jokeCards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+        <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><p class="text-xl">Why don't scientists trust atoms?</p></div><div class="flip-card-back"><p>Because they make up everything!</p></div></div></div>
+        <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><p class="text-xl">What did the math book say to the student?</p></div><div class="flip-card-back"><p>I've got problems!</p></div></div></div>
+        <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><p class="text-xl">Why was the history teacher always calm?</p></div><div class="flip-card-back"><p>Because they knew how to stay in the past!</p></div></div></div>
+        <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><p class="text-xl">Why can’t you trust an atom?</p></div><div class="flip-card-back"><p>Because they literally make up everything!</p></div></div></div>
+        <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><p class="text-xl">Why did the student eat his homework?</p></div><div class="flip-card-back"><p>Because the teacher said it was a piece of cake!</p></div></div></div>
+        <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><p class="text-xl">What do you call an angle that's gone bad?</p></div><div class="flip-card-back"><p>A "rebel" angle!</p></div></div></div>
+      </div>
+
+      <div id="topicContent" class="hidden bg-white text-black p-6 rounded shadow mt-10">
+        <button id="backBtn" class="mb-4 text-blue-500 hover:underline" onclick="goBack()">Back</button>
+        <h2 id="topicTitle" class="text-2xl font-bold mb-4"></h2>
+        <p id="topicDescription" class="text-sm leading-relaxed"></p>
+      </div>
+    </main>
+
+    <script>
+      const topicsData = {};
+      for (const [subject, topics] of Object.entries(subjects)) {
+        topics.forEach(topic => {
+          topicsData[topic] = `${topic} is a topic under ${subject}. Learn more about it here...`;
+        });
+
+        const container = document.createElement("div");
+        container.innerHTML = `
+          <div>
+            <div class="flex items-center space-x-1 cursor-pointer" onclick="toggleTopics('${subject}Topics')">
+              <i class="fas fa-caret-down"></i>
+              <span class="hover:underline">${subject}</span>
+            </div>
+            <div id="${subject}Topics" class="ml-4 mt-1">
+              ${subjects[subject].map(topic => `<a href="#" onclick="showTopic('${topic}')" class="block hover:underline">${topic}</a>`).join('')}
+            </div>
+          </div>`;
+        document.getElementById("dynamicSubjects").appendChild(container);
+      }
+
+      function toggleTopics(id) {
+        document.getElementById(id).classList.toggle('hidden');
+      }
+
+      function showTopic(topic) {
+        document.getElementById('topicTitle').textContent = topic;
+        document.getElementById('topicDescription').textContent = topicsData[topic] || 'Topic not found.';
+        document.getElementById('defaultCard').classList.add('hidden');
+        document.getElementById('jokeCards').classList.add('hidden');
+        document.getElementById('topicContent').classList.remove('hidden');
+      }
+
+      function goBack() {
+        document.getElementById('defaultCard').classList.remove('hidden');
+        document.getElementById('jokeCards').classList.remove('hidden');
+        document.getElementById('topicContent').classList.add('hidden');
+        document.getElementById('topicTitle').textContent = '';
+        document.getElementById('topicDescription').textContent = '';
+      }
+
+      document.getElementById('homeButton').addEventListener('click', goBack);
+      document.getElementById('profileBtn').addEventListener('click', () => {
+        document.getElementById('profileMenu').classList.toggle('hidden');
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SCRUM E-LEARNING</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    function isLoggedIn() {
+      return sessionStorage.getItem("userLoggedIn") === "true";
+    }
+    function handleTopicClick(event, topicLink) {
+      if (isLoggedIn()) {
+        window.location.href = topicLink;
+      } else {
+        alert("You need to log in or sign up first!");
+        window.location.href = "login.html";
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#4a90e2] text-sm md:text-base font-sans">
+
+  <section class="p-4 flex flex-col min-h-screen items-center">
+    <header class="flex justify-between items-center w-full max-w-sm md:max-w-xl mb-6">
+      <div class="flex items-center space-x-2">
+        <img src="pic.png" alt="Logo" class="w-8 h-8" />
+        <span class="text-base md:text-xl font-semibold text-white">SCRUM E-LEARNING</span>
+      </div>
+      <div class="flex space-x-2 text-sm">
+        <a href="login.html" class="bg-white text-black px-4 py-1 rounded hover:bg-gray-200 transition">Log in</a>
+        <a href="signup.html" class="bg-white text-black px-4 py-1 rounded hover:bg-gray-200 transition">Sign up</a>
+      </div>
+    </header>
+
+    <main class="flex flex-col items-center space-y-4 w-full">
+      <a href="https://accounts.google.com/signin" target="_blank" class="flex items-center bg-[#5bc0de] text-white px-4 py-2 rounded w-72 md:w-96 justify-center shadow text-sm md:text-base">
+        <img src="gugul.png" class="mr-3 w-5 h-5" alt="Google" />
+        Log in with Google
+      </a>
+
+      <span class="text-white font-medium">or</span>
+
+      <a href="https://www.facebook.com/login.php" target="_blank" class="flex items-center bg-[#3b5998] text-white px-4 py-2 rounded w-72 md:w-96 justify-center shadow text-sm md:text-base">
+        <img src="epbi.avif" class="mr-3 w-5 h-5" alt="Facebook" />
+        Log in with Facebook
+      </a>
+    </main>
+
+    <section class="bg-white mt-6 p-4 w-full max-w-sm md:max-w-xl rounded shadow">
+      <h3 class="text-center font-bold text-base md:text-lg mb-4">Choose a topic</h3>
+      <div class="flex space-x-4 overflow-x-auto scrollbar-thin pb-2">
+        <a href="#" onclick="handleTopicClick(event, 'science_earth_system.html')" class="flex flex-col items-center w-24 md:w-28 text-xs md:text-sm p-2 rounded hover:bg-gray-100 cursor-pointer transition">
+          <img src="sci.jpg" alt="Science" class="mb-2 w-full h-20 object-cover rounded"/>
+          <span class="text-center font-semibold">Earth's System</span>
+        </a>
+        <a href="#" onclick="handleTopicClick(event, 'history_philippine.html')" class="flex flex-col items-center w-24 md:w-28 text-xs md:text-sm p-2 rounded hover:bg-gray-100 cursor-pointer transition">
+          <img src="his.jpg" alt="History" class="mb-2 w-full h-20 object-cover rounded"/>
+          <span class="text-center font-semibold">Philippine History</span>
+        </a>
+        <a href="#" onclick="handleTopicClick(event, 'math_algebra_intro.html')" class="flex flex-col items-center w-24 md:w-28 text-xs md:text-sm p-2 rounded hover:bg-gray-100 cursor-pointer transition">
+          <img src="alg.jpg" alt="Algebra" class="mb-2 w-full h-20 object-cover rounded"/>
+          <span class="text-center font-semibold">Algebra</span>
+        </a>
+        <a href="#" onclick="handleTopicClick(event, 'pe_physical_education.html')" class="flex flex-col items-center w-24 md:w-28 text-xs md:text-sm p-2 rounded hover:bg-gray-100 cursor-pointer transition">
+          <img src="pe.jpg" alt="PE" class="mb-2 w-full h-20 object-cover rounded"/>
+          <span class="text-center font-semibold">Physical Education</span>
+        </a>
+      </div>
+    </section>
+  </section>
+
+</body>
+</html>
