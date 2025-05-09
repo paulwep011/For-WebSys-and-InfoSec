@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Science Topics</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <style>
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #4b5563;
+      border-radius: 3px;
+    }
+
+    .flip-card {
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 280px;
+      height: 80px;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      margin-bottom: 24px;
+    }
+    .flip-card-inner.flipped {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 280px;
+      height: 80px;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 600;
+      color: black;
+      border-radius: 0.25rem;
+    }
+    .flip-card-front {
+      background-color: #4a7ac7;
+      border: 2px solid #2c4a8a;
+    }
+    .flip-card-back {
+      background-color: #4a7ac7;
+      border: 2px solid #2c4a8a;
+      transform: rotateY(180deg);
+    }
+
+    .sidebar {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .sidebar-hidden {
+      transform: translateX(-100%);
+    }
+
+    .sidebar-visible {
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body class="bg-[#4a7ac7] min-h-screen flex flex-col relative">
+  <div class="flex">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar bg-gray-300 w-48 min-h-screen p-3 select-none overflow-y-auto sidebar-hidden">
+      <div class="flex flex-col items-center mb-3">
+        <i class="fas fa-home text-xl"></i>
+        <span class="text-xs mt-1">Select Topics:</span>
+      </div>
+      <nav class="text-xs font-semibold space-y-1">
+        <div class="flex items-center space-x-1 cursor-pointer hover:text-blue-700" data-subject="Astronomy">
+          <i class="fas fa-caret-right"></i><span>Astronomy</span>
+        </div>
+        <div class="flex items-center space-x-1 cursor-pointer hover:text-blue-700" data-subject="Physics">
+          <i class="fas fa-caret-right"></i><span>Physics</span>
+        </div>
+        <div class="flex items-center space-x-1 cursor-pointer hover:text-blue-700" data-subject="Chemistry">
+          <i class="fas fa-caret-right"></i><span>Chemistry</span>
+        </div>
+        <div class="flex items-center space-x-1 cursor-pointer hover:text-blue-700" data-subject="Biology">
+          <i class="fas fa-caret-right"></i><span>Biology</span>
+        </div>
+        <div class="flex items-center space-x-1 cursor-pointer hover:text-blue-700" data-subject="Geology">
+          <i class="fas fa-caret-right"></i><span>Geology</span>
+        </div>
+      </nav>
+      <p class="mt-1 text-xs font-normal">See more subject</p>
+      <p class="mt-3 font-bold text-sm">Topic</p>
+      <nav id="topicList" class="text-xs font-semibold space-y-1 mt-1"></nav>
+      <p class="mt-1 text-xs font-normal">See more</p>
+      <p class="mt-1 text-xs font-normal">View Details</p>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 flex flex-col items-center relative">
+      <button id="burgerBtn" aria-label="Menu" class="absolute top-2 left-2 z-50 bg-white p-2 rounded shadow">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+
+      <div class="flip-card" id="flipCard" tabindex="0" role="button" aria-pressed="false" aria-label="Science Topics. Click to flip.">
+        <div class="flip-card-inner" id="flipCardInner">
+          <div class="flip-card-front">Science Topics</div>
+          <div class="flip-card-back">Science Topics</div>
+        </div>
+      </div>
+
+      <div id="subjectContent" class="flex flex-col sm:flex-row gap-6 max-w-4xl w-full justify-center"></div>
+    </main>
+  </div>
+
+  <!-- Profile Button -->
+  <button id="profileBtn" aria-label="User profile" class="absolute top-2 right-2 bg-white p-1 rounded shadow z-50">
+    <i class="fas fa-user"></i>
+  </button>
+
+  <!-- Profile Dropdown -->
+  <div id="profileMenu" class="hidden absolute top-10 right-2 bg-white rounded shadow p-2 text-xs space-y-1 z-40">
+    <a href="profile.html" class="block hover:underline">My Profile</a>
+    <a href="logout.html" class="block hover:underline">Log Out</a>
+  </div>
+
+  <script>
+    const subjects = {
+      Astronomy: {
+        topics: ["Stars", "Planets", "Galaxies", "Black Holes", "Cosmology"],
+        description: "Explore the wonders of space!"
+      },
+      Physics: {
+        topics: ["Mechanics", "Thermodynamics", "Optics", "Quantum Physics", "Relativity"],
+        description: "Learn about the laws of nature."
+      },
+      Chemistry: {
+        topics: ["Organic Chemistry", "Inorganic Chemistry", "Physical Chemistry", "Analytical Chemistry", "Biochemistry"],
+        description: "Discover the building blocks of matter."
+      },
+      Biology: {
+        topics: ["Cell Biology", "Genetics", "Ecology", "Evolution", "Microbiology"],
+        description: "Study living organisms and life processes."
+      },
+      Geology: {
+        topics: ["Mineralogy", "Volcanology", "Seismology", "Paleontology", "Geomorphology"],
+        description: "Understand Earth's physical structure."
+      }
+    };
+
+    const burgerBtn = document.getElementById("burgerBtn");
+    const sidebar = document.getElementById("sidebar");
+    const topicList = document.getElementById("topicList");
+    const subjectContent = document.getElementById("subjectContent");
+    const flipCardInner = document.getElementById("flipCardInner");
+    const flipCard = document.getElementById("flipCard");
+    const profileBtn = document.getElementById("profileBtn");
+    const profileMenu = document.getElementById("profileMenu");
+
+    let currentSubject = "Astronomy";
+
+    function renderTopics(subject) {
+      topicList.innerHTML = "";
+      if (!subjects[subject]) return;
+      subjects[subject].topics.forEach(topic => {
+        const div = document.createElement("div");
+        div.className = "flex items-center space-x-1 cursor-pointer hover:text-blue-700";
+        div.textContent = topic;
+        topicList.appendChild(div);
+      });
+    }
+
+    function renderSubjectContent(subject) {
+      subjectContent.innerHTML = "";
+      if (!subjects[subject]) return;
+      const card = document.createElement("div");
+      card.className = "bg-gray-300 p-4 w-64 text-xs leading-tight";
+      const h2 = document.createElement("h2");
+      h2.className = "font-semibold mb-2 text-center";
+      h2.textContent = subject;
+      const p = document.createElement("p");
+      p.textContent = subjects[subject].description;
+      card.appendChild(h2);
+      card.appendChild(p);
+      subjectContent.appendChild(card);
+    }
+
+    // Initial load
+    renderTopics(currentSubject);
+    renderSubjectContent(currentSubject);
+
+    // Flip card toggle
+    function toggleFlip() {
+      flipCardInner.classList.toggle("flipped");
+      const pressed = flipCard.getAttribute("aria-pressed") === "true";
+      flipCard.setAttribute("aria-pressed", String(!pressed));
+    }
+
+    flipCard.addEventListener("click", toggleFlip);
+    flipCard.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggleFlip();
+      }
+    });
+
+    // Burger sidebar toggle
+    burgerBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("sidebar-hidden");
+      sidebar.classList.toggle("sidebar-visible");
+    });
+
+    // Subject selection
+    sidebar.querySelectorAll("nav:first-of-type > div").forEach(item => {
+      item.addEventListener("click", () => {
+        const selected = item.getAttribute("data-subject");
+        if (!selected || !subjects[selected]) return;
+        currentSubject = selected;
+        renderTopics(currentSubject);
+        renderSubjectContent(currentSubject);
+        if (window.innerWidth < 768) {
+          sidebar.classList.add("sidebar-hidden");
+          sidebar.classList.remove("sidebar-visible");
+        }
+      });
+    });
+
+    // Profile menu toggle
+    profileBtn.addEventListener("click", () => {
+      profileMenu.classList.toggle("hidden");
+    });
+
+    window.addEventListener("click", (e) => {
+      if (!profileBtn.contains(e.target) && !profileMenu.contains(e.target)) {
+        profileMenu.classList.add("hidden");
+      }
+    });
+  </script>
+</body>
+</html>

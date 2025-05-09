@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | Scrum E-Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .flip-card {
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 120px;
+      height: 40px;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+    .flip-card-inner:hover {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 120px;
+      height: 40px;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: black;
+      background-color: #fff;
+      border-radius: 0.25rem;
+    }
+    .flip-card-front {
+      background-color: #4a90e2;
+    }
+    .flip-card-back {
+      background-color: #4a90e2;
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body class="bg-[#4a90e2] text-[10px] font-sans flex items-center justify-center min-h-screen">
+
+  <section class="p-2 flex flex-col items-center w-full max-w-xs">
+    <div class="flip-card mb-4">
+      <div class="flip-card-inner" id="flipCardInner">
+        <div class="flip-card-front flex items-center space-x-2">
+          <img src="pic.png" class="w-6 h-6" />
+          <span class="text-[12px] font-semibold">SCRUM E-LEARNING</span>
+        </div>
+        <div class="flip-card-back flex items-center justify-center">
+          <span class="text-[12px] font-semibold">SCRUM E-LEARNING</span>
+        </div>
+      </div>
+    </div>
+    <form autocomplete="off" class="bg-white p-4 rounded shadow w-full text-[9px] flex flex-col space-y-2">
+      <h3 class="text-center font-bold text-[11px]">Log in</h3>
+      <input class="border border-gray-300 text-[9px] w-full px-2 py-1 rounded" placeholder="Email" type="email" required />
+      <div class="relative">
+        <input id="password" class="border border-gray-300 text-[9px] w-full px-2 py-1 rounded pr-10" placeholder="Password" type="password" required />
+        <button type="button" onclick="togglePassword()" class="absolute right-2 top-1/2 -translate-y-1/2 text-[8px] text-blue-500 hover:underline">
+          Show
+        </button>
+      </div>
+      <a class="text-[7px] text-right text-blue-600 hover:underline" href="recover.html">Forgot Password?</a>
+      <button class="bg-[#5bc0de] text-white text-[10px] py-1 rounded mt-1 hover:bg-[#39a8cb]" type="submit">
+        Log in
+      </button>
+      <p class="text-[7px] text-center mt-1">
+        Don't have an account?
+        <a class="text-blue-600 hover:underline" href="signup.html">Click SIGN UP</a>
+      </p>
+    </form>
+  </section>
+
+  <script>
+    function togglePassword() {
+      const pwInput = document.getElementById('password');
+      const toggleBtn = event.target;
+      if (pwInput.type === 'password') {
+        pwInput.type = 'text';
+        toggleBtn.textContent = 'Hide';
+      } else {
+        pwInput.type = 'password';
+        toggleBtn.textContent = 'Show';
+      }
+    }
+  </script>
+
+</body>
+</html>
